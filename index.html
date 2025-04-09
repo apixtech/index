@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APIX Technology C.A. - Soluciones Tecnológicas Empresariales</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+      :root {
+          --primary-color: #0077BE;
+          --secondary-color: #1E90FF;
+          --accent-color: #2C3E50;
+          --gradient-primary: linear-gradient(135deg, #0077BE 0%, #1E90FF 100%);
+          --text-color: #333;
+          --background-color: #F4F4F4;
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      @keyframes gradientAnimation {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+      }
+
+      body {
+          font-family: 'Montserrat', sans-serif;
+          line-height: 1.6;
+          color: var(--text-color);
+          background-color: var(--background-color);
+          overflow-x: hidden;
+      }
+
+      .background-gradient {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(-45deg, #0077BE, #1E90FF, #2C3E50, #4A90E2);
+          background-size: 400% 400%;
+          animation: gradientAnimation 15s ease infinite;
+          z-index: -1;
+          opacity: 0.1;
+      }
+
+      .container {
+          width: 90%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+
+      .header {
+          background: var(--gradient-primary);
+          color: white;
+          text-align: center;
+          padding: 4rem 0;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .header-content {
+          position: relative;
+          z-index: 2;
+      }
+
+      .header-content h1 {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+      }
+
+      .header-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.2);
+          transform: skewY(-5deg);
+          z-index: 1;
+      }
+
+      .info-carousel {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          padding: 2rem 0;
+          background: white;
+      }
+
+      .carousel-wrapper {
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+      }
+
+      .carousel-container {
+          display: flex;
+          gap: 20px;
+          transition: transform 0.5s ease;
+          padding: 0 20px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+      }
+
+      .carousel-container::-webkit-scrollbar {
+          display: none;
+      }
+
+      .carousel-card {
+          flex: 0 0 calc(100% - 40px);
+          max-width: 350px;
+          min-width: 280px;
+          background: var(--background-color);
+          border-radius: 15px;
+          padding: 2rem;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+          transition: all 0.3s ease;
+          scroll-snap-align: center;
+          position: relative;
+          margin: 10px;
+      }
+
+      .carousel-card::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 4px;
+          background: var(--gradient-primary);
+          transition: width 0.3s ease;
+      }
+
+      .carousel-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+      }
+
+      .carousel-card:hover::before {
+          width: 100%;
+      }
+
+      .carousel-card-icon {
+          font-size: 3rem;
+          color: var(--primary-color);
+          margin-bottom: 1rem;
+          text-align: center;
+      }
+
+      .carousel-controls {
+          display: flex;
+          justify-content: center;
+          margin-top: 1rem;
+      }
+
+      .carousel-dot {
+          width: 10px;
+          height: 10px;
+          background-color: rgba(0,0,0,0.3);
+          border-radius: 50%;
+          margin: 0 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      .carousel-dot.active {
+          background-color: var(--primary-color);
+      }
+
+      .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+          margin-top: 2rem;
+          padding: 2rem 5%;
+      }
+
+      .service-card {
+          background: white;
+          border-radius: 15px;
+          padding: 2rem;
+          text-align: center;
+          transition: all 0.3s ease;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+          position: relative;
+          overflow: hidden;
+      }
+
+      .service-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 5px;
+          background: var(--gradient-primary);
+      }
+
+      .service-card:hover {
+          transform: translateY(-15px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      }
+
+      .about-section {
+          background: white;
+          padding: 4rem 0;
+          text-align: center;
+      }
+
+      .about-content {
+          max-width: 800px;
+          margin: 0 auto;
+          background: var(--background-color);
+          padding: 3rem;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          position: relative;
+      }
+
+      .about-content::after {
+          content: '"';
+          position: absolute;
+          font-size: 10rem;
+          color: rgba(30, 144, 255, 0.1);
+          right: 50px;
+          top: -50px;
+          z-index: 1;
+      }
+
+      .cta-button {
+          display: inline-block;
+          background: var(--gradient-primary);
+          color: white;
+          padding: 12px 30px;
+          text-decoration: none;
+          border-radius: 50px;
+          margin-top: 20px;
+          transition: transform 0.3s ease;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .cta-button:hover {
+          transform: scale(1.05);
+      }
+
+      .footer {
+          background: var(--accent-color);
+          color: white;
+          text-align: center;
+          padding: 2rem 0;
+      }
+
+      @media (max-width: 768px) {
+          .services-grid {
+              grid-template-columns: 1fr;
+          }
+          .carousel-card {
+              flex: 0 0 calc(100% - 40px);
+              max-width: 90%;
+          }
+          .carousel-container {
+              scroll-padding: 0 20px;
+          }
+          .header-content h1 {
+              font-size: 2rem;
+          }
+          .about-content {
+              padding: 1.5rem;
+          }
+      }
+  </style>
+</head>
+<body>
+  <div class="background-gradient"></div>
+  
+  <header class="header">
+      <div class="header-overlay"></div>
+      <div class="container header-content">
+          <h1>APIX TECHNOLOGY C.A.</h1>
+          <p>Soluciones Tecnológicas Empresariales de Clase Mundial</p>
+      </div>
+  </header>
+
+  <section class="info-carousel">
+      <div class="carousel-wrapper">
+          <div class="carousel-container" id="carouselContainer">
+              <div class="carousel-card">
+                  <div class="carousel-card-icon">🚀</div>
+                  <h3>Innovación Tecnológica</h3>
+                  <p>Desarrollamos soluciones de vanguardia que transforman la forma en que su empresa opera.</p>
+              </div>
+              <div class="carousel-card">
+                  <div class="carousel-card-icon">💡</div>
+                  <h3>Consultoría Estratégica</h3>
+                  <p>Asesoramiento experto para impulsar la transformación digital de su organización.</p>
+              </div>
+              <div class="carousel-card">
+                  <div class="carousel-card-icon">🔒</div>
+                  <h3>Seguridad Informática</h3>
+                  <p>Protegemos sus activos digitales con las más avanzadas soluciones de ciberseguridad.</p>
+              </div>
+              <div class="carousel-card">
+                  <div class="carousel-card-icon">📊</div>
+                  <h3>Inteligencia de Datos</h3>
+                  <p>Convertimos sus datos en información estratégica para toma de decisiones.</p>
+              </div>
+          </div>
+          <div class="carousel-controls">
+              <span class="carousel-dot active" data-slide="0"></span>
+              <span class="carousel-dot" data-slide="1"></span>
+              <span class="carousel-dot" data-slide="2"></span>
+              <span class="carousel-dot" data-slide="3"></span>
+          </div>
+      </div>
+  </section>
+
+  <main class="container">
+      <section class="services-grid">
+          <div class="service-card">
+              <h3>Desarrollo de Software</h3>
+              <p>Soluciones personalizadas que transforman su visión en realidad digital.</p>
+          </div>
+          <div class="service-card">
+              <h3>Aplicaciones Empresariales</h3>
+              <p>Aplicaciones robustas que optimizan procesos y potencian la productividad.</p>
+          </div>
+          <div class="service-card">
+              <h3>Consultoría Tecnológica</h3>
+              <p>Asesoramiento estratégico para impulsar la transformación digital.</p>
+          </div>
+      </section>
+
+      <section class="about-section">
+          <div class="about-content">
+              <h2>Nuestra Historia</h2>
+              <p>En APIX Technology C.A., contamos con un equipo de profesionales altamente calificados con más de 8 años de experiencia en el desarrollo de software. Nos especializamos en crear soluciones tecnológicas integrales que transforman la manera en que las empresas operan.</p>
+              <br>
+              <p>Nuestro compromiso va más allá del código: somos socios estratégicos que entienden a fondo las necesidades de cada cliente, ofreciendo soluciones que impulsan su crecimiento y competitividad en el mercado digital.</p>
+              <a href="https://wa.me/584125464250?text=Estoy%20interesado%20en%20los%20servicios%20de%20APIX%20Technology%20C.A.%20%C2%BFPueden%20proporcionarme%20m%C3%A1s%20informaci%C3%B3n?" target="_blank" class="cta-button">Contáctanos</a>
+          </div>
+      </section>
+  </main>
+
+  <footer class="footer">
+      <div class="container">
+          <p>&copy; 2025 APIX TECHNOLOGY C.A. Todos los derechos reservados</p>
+          <p>Contacto: apixtech@proton.me | +58 (0412) 546-4250</p>
+      </div>
+  </footer>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const carouselContainer = document.getElementById('carouselContainer');
+          const carouselDots = document.querySelectorAll('.carousel-dot');
+          const carouselCards = document.querySelectorAll('.carousel-card');
+
+          // Función para actualizar los dots
+          function updateDots(scrollPosition) {
+              const cardWidth = carouselCards[0].offsetWidth + 20; // Incluye el margen
+              const currentIndex = Math.round(scrollPosition / cardWidth);
+              
+              carouselDots.forEach((dot, index) => {
+                  dot.classList.toggle('active', index === currentIndex);
+              });
+          }
+
+          // Evento de scroll para actualizar dots
+          carouselContainer.addEventListener('scroll', () => {
+              updateDots(carouselContainer.scrollLeft);
+          });
+
+          // Eventos para los dots
+          carouselDots.forEach(dot => {
+              dot.addEventListener('click', () => {
+                  const slideIndex = parseInt(dot.getAttribute('data-slide'));
+                  const cardWidth = carouselCards[0].offsetWidth + 20; // Incluye el margen
+                  
+                  carouselContainer.scrollTo({
+                      left: slideIndex * cardWidth,
+                      behavior: 'smooth'
+                  });
+              });
+          });
+
+          // Auto-slide
+          function autoSlide() {
+              const cardWidth = carouselCards[0].offsetWidth + 20; // Incluye el margen
+              const currentScroll = carouselContainer.scrollLeft;
+              const maxScroll = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+              
+              let nextScroll = currentScroll + cardWidth;
+              if (nextScroll >= maxScroll) {
+                  nextScroll = 0;
+              }
+              
+              carouselContainer.scrollTo({
+                  left: nextScroll,
+                  behavior: 'smooth'
+              });
+          }
+
+          // Iniciar auto-slide cada 5 segundos
+          setInterval(autoSlide, 5000);
+      });
+  </script>
+</body>
+</html>
